@@ -196,7 +196,8 @@ func (mq *minQuery) All(result interface{}, cursorFields ...string) (cursor stri
 	if limitedQuery {
 		queryLimit++ // query one more element
 		cmd = append(cmd, bson.DocElem{Name: "limit", Value: queryLimit})
-		cmd = append(cmd, bson.DocElem{Name: "batchSize", Value: queryLimit})
+		// 2017-06-19: seemed if this is added, the second paged query would return one less result
+		// cmd = append(cmd, bson.DocElem{Name: "batchSize", Value: queryLimit})
 	}
 	if mq.filter != nil {
 		cmd = append(cmd, bson.DocElem{Name: "filter", Value: mq.filter})
