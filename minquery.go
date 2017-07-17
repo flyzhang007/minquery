@@ -4,7 +4,7 @@ package minquery
 
 import (
 	"errors"
-	log "github.com/Sirupsen/logrus"
+	// log "github.com/Sirupsen/logrus"
 
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
@@ -133,7 +133,7 @@ func (mq *minQuery) Cursor(c string) MinQuery {
 	mq.cursor = c
 	if c != "" {
 		mq.min, mq.cursorErr = mq.cursorCodec.ParseCursor(c)
-		log.Infof("[minQuery::Cursor] min: %s", mq.min)
+		// log.Infof("[minQuery::Cursor] min: %s", mq.min)
 	} else {
 		mq.min, mq.cursorErr = nil, nil
 	}
@@ -277,7 +277,7 @@ func (mq *minQuery) All(result interface{}, cursorFields ...string) (cursor stri
 	} else {
 		err = mq.db.C(mq.coll).NewIter(nil, firstBatch, 0, nil).All(result)
 	}
-	log.Infof("[minQuery::All] mq.min: %s", mq.min)
+	// log.Infof("[minQuery::All] mq.min: %s", mq.min)
 	return
 }
 
